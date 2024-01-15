@@ -195,16 +195,25 @@ func challenge11(_ input1: String, _ input2: String) -> Bool {
 
     guard input1.count == input2.count else { return false }
 
-    let lowercasedInput1 = input1.lowercased()
-    let lowercasedInput2 = input2.lowercased()
+    let lowercasedInput1 = Array(input1.lowercased())
+    let lowercasedInput2 = Array(input2.lowercased())
     var errorCount = 0
 
     for (location, letter) in lowercasedInput1.enumerated() {
-        if lowercasedInput2[location] != letter
+        if lowercasedInput2[location] != letter {
+            print(letter)
+            errorCount += 1
+        }
     }
-
-
+    return errorCount < 4
 }
+
+assert(challenge11("clamp", "cramp") == true, "Challenge 11 failed.")
+assert(challenge11("clamp", "crams") == true, "Challenge 11 failed.")
+assert(challenge11("clamp", "grams") == true, "Challenge 11 failed.")
+assert(challenge11("clamp", "grans") == false, "Challenge 11 failed.")
+assert(challenge11("clamp", "clam") == false, "Challenge 11 failed.")
+assert(challenge11("clamp", "maple") == false, "Challenge 11 failed.")
 
 
 
