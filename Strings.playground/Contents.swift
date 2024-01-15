@@ -127,3 +127,89 @@ assert(challenge7("Thi s is a test") == "Thi s is a test", "Challenge 7 failed")
 
 
 
+//Challenge 8: Write a function that accepts two strings, and returns true if one string is rotation of the other, taking letter case into account.
+func challenge8(input1: String, input2: String) -> Bool {
+    guard input1.count == input2.count else {
+        return false
+    }
+    var doubledouble = input1 + input1
+
+    return doubledouble.contains(input2)
+}
+
+assert(challenge8(input1: "abcde", input2: "eabcd") == true, "Challenge 8 failed.")
+assert(challenge8(input1: "abcde", input2: "cdeab") == true, "Challenge 8 failed.")
+assert(challenge8(input1: "abcde", input2: "abced") == false, "Challenge 8 failed.")
+assert(challenge8(input1: "abc", input2: "a") == false, "Challenge 8 failed.")
+
+
+
+//Challenge 9: Write a function that returns true if it is given a string that is an English pangram, ignoring letter case.
+func challenge9(_ input: String) -> Bool {
+    guard input.count > 25 else {return false}
+
+    var alphabet = ["a","b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ]
+    let lowercased = input.lowercased()
+
+    for letter in alphabet {
+        if !lowercased.contains(String(letter)) {
+
+            return false
+        }
+    }
+    return true
+}
+
+assert(challenge9("The quick brown fox jumps over the lazy dog") == true, "Challenge 9 failed")
+assert(challenge9("The quick brown fox jumped over the lazy dog") == false, "Challenge 9 failed")
+assert(challenge9("The five boxing wizards jump quickly.") == true, "Challenge 9 failed")
+
+
+
+//Challenge 10: Given a string in English, return a tuple containing the number of vowels and consonants.
+func challenge10(_ input: String) -> (Int, Int) {
+    let vowels = ["a", "e", "i", "o", "u"]
+    let consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n","p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
+    var vCount = 0
+    var cCount = 0
+
+    let lowercasedInput = input.lowercased()
+
+    for letter in lowercasedInput {
+        if consonants.contains(String(letter)) {
+            cCount += 1
+        } else if vowels.contains(String(letter)) {
+            vCount += 1
+        }
+    }
+    return (vCount, cCount)
+}
+
+assert(challenge10("Swift Coding Challenges") == (6,15), "Challenge 10 failed")
+assert(challenge10("Mississippi") == (4,7), "Challenge 10 failed")
+
+
+
+//Challenge 11: Write a function that accepts two strings, and returns true if they are identical in length but have no more than three different letters, taking case and string order into account.
+func challenge11(_ input1: String, _ input2: String) -> Bool {
+
+    guard input1.count == input2.count else { return false }
+
+    let lowercasedInput1 = input1.lowercased()
+    let lowercasedInput2 = input2.lowercased()
+    var errorCount = 0
+
+    for (location, letter) in lowercasedInput1.enumerated() {
+        if lowercasedInput2[location] != letter
+    }
+
+
+}
+
+
+
+
+
+
+
+
