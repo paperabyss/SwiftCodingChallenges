@@ -201,7 +201,6 @@ func challenge11(_ input1: String, _ input2: String) -> Bool {
 
     for (location, letter) in lowercasedInput1.enumerated() {
         if lowercasedInput2[location] != letter {
-            print(letter)
             errorCount += 1
         }
     }
@@ -214,6 +213,75 @@ assert(challenge11("clamp", "grams") == true, "Challenge 11 failed.")
 assert(challenge11("clamp", "grans") == false, "Challenge 11 failed.")
 assert(challenge11("clamp", "clam") == false, "Challenge 11 failed.")
 assert(challenge11("clamp", "maple") == false, "Challenge 11 failed.")
+
+
+
+//Challenge 12: “Write a function that accepts a string of words with a similar prefix, separated by spaces, and returns the longest substring that prefixes all words.”
+func challenge12(_ input1: String) -> String {
+    var longestSubstring = [""]
+    var lastLetter = ""
+    var breakOut = false
+    var words = Array(input1.components(separatedBy: " "))
+    var startingWord = words[0]
+
+    for (location, letter) in startingWord.enumerated() {
+        if breakOut == true {
+            break
+        }
+        for word in words {
+            var arrayWord = Array(word)
+            if arrayWord[location] == letter {
+                lastLetter = String(letter)
+            } else {
+                lastLetter = ""
+                breakOut = true
+                break
+            }
+        }
+        longestSubstring.append(lastLetter)
+        }
+
+    return longestSubstring.joined()
+}
+
+assert(challenge12("swift switch swill swim") == "swi", "Challenge 12 failed.")
+assert(challenge12("flip flap flop") == "fl", "Challenge 12 failed")
+
+
+
+//Challenge 13: Write a function that accepts a string as input, then returns how often each letter is repeated in a single run, taking case into account.
+func challenge13(_ input: String) -> String {
+    var currentLetter = ""
+    var letterCount = 0
+    var totalLetterCount = 0
+
+    var output = ""
+
+    for letter in input {
+        if String(letter) == currentLetter {
+            letterCount += 1
+            totalLetterCount += 1
+        } else {
+            output.append(currentLetter)
+            if letterCount > 0 {
+                output.append(String(letterCount))
+            }
+            currentLetter = String(letter)
+            letterCount = 1
+            totalLetterCount += 1
+        }
+
+        if totalLetterCount == input.count {
+            output.append(currentLetter)
+            output.append(String(letterCount))
+        }
+    }
+    return output
+}
+
+assert(challenge13("aabbcc") == "a2b2c2", "Challenge 13 failed.")
+assert(challenge13("aaabaaabaaa") == "a3b1a3b1a3", "Challenge 13 failed.")
+assert(challenge13("aaAAaa") == "a2A2a2", "Challenge 13 failed.")
 
 
 
