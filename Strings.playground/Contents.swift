@@ -285,8 +285,28 @@ assert(challenge13("aaAAaa") == "a2A2a2", "Challenge 13 failed.")
 
 //Challenge14: Write a function that prints all possible permutations of a given input string.
 func challenge14(_ input: String) -> [String] {
-    guard input.count > 1 else { return [input]}
+    guard Set(input).count > 1 else { return [input]}
     var maxPermutations: Int {
+
+        var repeatCount = 0
+        var usedLetters = [""]
+        var repeatLetters = [""]
+        for letter in input {
+            if usedLetters.contains(String(letter)) {
+                repeatLetters.append(String(letter))
+            }
+            usedLetters.append(String(letter))
+        }
+        var setRepeat = Set(repeatLetters)
+        var allRepeatLetters = Array(setRepeat)
+
+        for i in allRepeatLetters {
+            for j in input {
+                if String(i) == String(j) {
+                    repeatCount += 1
+                }
+            }
+        }
 
         var currentPermutations = input.count
         var nextMultiple = input.count - 1
@@ -296,7 +316,9 @@ func challenge14(_ input: String) -> [String] {
             currentPermutations *= nextMultiple
             nextMultiple -= 1
         }
-        return currentPermutations
+        print(repeatCount)
+        print((currentPermutations / (repeatCount == 0 ? 1 : repeatCount)))
+        return (currentPermutations / (repeatCount == 0 ? 1 : repeatCount))
     }
     var foundPermutations: [String] = []
     var testPermutation = ""
@@ -316,8 +338,8 @@ func challenge14(_ input: String) -> [String] {
     return foundPermutations
 }
 
-print(challenge14("wombat"))
-// The above sollutions does not work for words with multiple of the same letter. Ex: "nan" will never stop since there are only 3 possible permutaions but the function will continue to look until it finds 6 unique ones. Possibly fixed by using a Set of the input for the maxPermutations number.
+print(challenge14("Test"))
+
 
 
 
