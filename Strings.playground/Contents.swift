@@ -338,7 +338,7 @@ func challenge14(_ input: String) -> [String] {
     return foundPermutations
 }
 
-print(challenge14("Test"))
+print(challenge14("Tanner"))
 
 
 
