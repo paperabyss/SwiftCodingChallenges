@@ -40,3 +40,20 @@ assert(challenge17(input1: 12, input2: 12) >= 12 && challenge17(input1: 12, inpu
 assert(challenge17(input1: 12, input2: 18) != 7)
 
 
+
+//Challenge 18: “Create a function that accepts positive two integers, and raises the first to the power of the second.”
+func challenge18(number: Int, power: Int) -> Int {
+    guard number > 0 && power > 0 else { return 0}
+    var insideNumber = number
+    for _ in (1..<power) {
+        insideNumber *= number
+    }
+    return insideNumber
+}
+
+assert(challenge18(number: 4, power: 3) == 64, "Challenge 19 failed")
+assert(challenge18(number: 2, power: 8) == 256, "Challenge 19 failed")
+assert(challenge18(number: 1, power: 1) == 1, "Challenge 19 failed")
+
+
+
