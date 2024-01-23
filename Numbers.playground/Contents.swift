@@ -41,7 +41,7 @@ assert(challenge17(input1: 12, input2: 18) != 7)
 
 
 
-//Challenge 18: “Create a function that accepts positive two integers, and raises the first to the power of the second.”
+//Challenge 18: Create a function that accepts positive two integers, and raises the first to the power of the second.
 func challenge18(number: Int, power: Int) -> Int {
     guard number > 0 && power > 0 else { return 0}
     var insideNumber = number
@@ -54,6 +54,39 @@ func challenge18(number: Int, power: Int) -> Int {
 assert(challenge18(number: 4, power: 3) == 64, "Challenge 19 failed")
 assert(challenge18(number: 2, power: 8) == 256, "Challenge 19 failed")
 assert(challenge18(number: 1, power: 1) == 1, "Challenge 19 failed")
+
+
+
+//Challenge 19: Swap two positive variable integers, a and b, without using a temporary variable.
+func challenge19(a: Int, b: Int) -> (Int, Int) {
+    var a = a
+    var b = b
+    (b,a) = (a,b)
+
+    return (a,b)
+}
+
+
+
+//Challege 20: “Write a function that accepts an integer as its parameter and returns true if the number is prime.”
+func challenge20(number: Int) -> Bool{
+    guard number > 1 else { return false }
+    guard number != 2 else {return true}
+
+    var largestPossibleMultiple = Double(number).squareRoot()
+    for i in (2...Int(largestPossibleMultiple)) {
+        if number % i == 0 {
+            return false
+        }
+    }
+    return true
+}
+
+assert(challenge20(number: 11) == true, "Challenge 20 failed")
+assert(challenge20(number: 13) == true, "Challenge 20 failed")
+assert(challenge20(number: 4) == false, "Challenge 20 failed")
+assert(challenge20(number: 9) == false, "Challenge 20 failed")
+assert(challenge20(number: 16777259) == true, "Challenge 20 failed")
 
 
 
