@@ -90,3 +90,35 @@ assert(challenge20(number: 16777259) == true, "Challenge 20 failed")
 
 
 
+//Challenge 21: Create a function that accepts any positive integer and returns the next highest and next lowest number that has the same number of ones in its binary representation. If either number is not possible, return nil for it.
+func challenge21(num: Int) -> (Int?, Int?) {
+    let binaryNum = String(num, radix: 2)
+    let binaryOnes = binaryNum.filter {
+        $0 == "1"}
+
+    var nextHighestMatch: Int?
+    var nextLowestMatch: Int?
+
+    for i in ((num+1)...Int.max) {
+        let insideBinaryOnes = String(i, radix: 2).filter{ $0 == "1"}
+        if insideBinaryOnes == binaryOnes {
+            nextHighestMatch = i
+            break
+        }
+    }
+
+    for i in (0..<num).reversed() {
+        let insideBinaryOnes = String(i, radix: 2).filter{ $0 == "1"}
+        if insideBinaryOnes == binaryOnes {
+            nextLowestMatch = i
+            break
+        }
+    }
+
+    return(nextLowestMatch,nextHighestMatch)
+}
+assert(challenge21(num: 12) == (10,17), "Challenge 21 failed")
+assert(challenge21(num: 28) == (26,35), "Challenge 21 failed")
+
+
+
