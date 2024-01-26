@@ -73,7 +73,7 @@ func challenge20(number: Int) -> Bool{
     guard number > 1 else { return false }
     guard number != 2 else {return true}
 
-    var largestPossibleMultiple = Double(number).squareRoot()
+    let largestPossibleMultiple = Double(number).squareRoot()
     for i in (2...Int(largestPossibleMultiple)) {
         if number % i == 0 {
             return false
@@ -120,5 +120,25 @@ func challenge21(num: Int) -> (Int?, Int?) {
 assert(challenge21(num: 12) == (10,17), "Challenge 21 failed")
 assert(challenge21(num: 28) == (26,35), "Challenge 21 failed")
 
+//Challenge 22: Create a function that accepts an unsigned 8-bit integer and returns its binary reverse, padded so that it holds precisely eight binary digits.
+
+func challenge22(num: Int) -> Int {
+    var binaryNum = String(num, radix: 2)
+
+    while binaryNum.count != 8 {
+        binaryNum.insert("0", at: binaryNum.startIndex)
+    }
+
+    var revereseBinary = String(binaryNum.reversed())
+
+    var returnNumber = Int(revereseBinary, radix: 2)
+
+    return returnNumber!
+}
+
+assert(challenge22(num: 4) == 32, "Challenge 22 failed.")
+assert(challenge22(num: 41) == 148, "Challenge 22 failed.")
+assert(challenge22(num: 32) == 4, "Challenge 22 failed.")
+assert(challenge22(num: 148) == 41, "Challenge 22 failed.")
 
 
