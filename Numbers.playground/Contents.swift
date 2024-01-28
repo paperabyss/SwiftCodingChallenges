@@ -142,3 +142,42 @@ assert(challenge22(num: 32) == 4, "Challenge 22 failed.")
 assert(challenge22(num: 148) == 41, "Challenge 22 failed.")
 
 
+
+// Challenge 23: Write a function that accepts a string and returns true if it contains only numbers, i.e. the digits 0 through 9.
+func challenge23(input: String) -> Bool {
+    var filteredInput = input.components(separatedBy: .decimalDigits).joined()
+    return filteredInput.isEmpty
+}
+
+assert(challenge23(input: "0101010101") == true, "Challenge 23 failed")
+assert(challenge23(input: "123456789") == true, "Challenge 23 failed")
+assert(challenge23(input: "9223372036854775808") == true, "Challenge 23 failed")
+assert(challenge23(input: "1.01") == false, "Challenge 23 failed")
+
+
+
+//Challenge 24: Given a string that contains both letters and numbers, write a function that pulls out all the numbers then returns their sum.
+func challenge24(input: String) -> Int {
+    var filteredInput = input.components(separatedBy: .decimalDigits.inverted)
+    
+    var numbers = [0]
+    
+    for i in filteredInput {
+        if Int(i) != nil {
+            numbers.append(Int(i)!)
+        }
+    }
+
+    var total = 0
+    for number in numbers {
+        total += number
+    }
+
+    return total
+}
+
+assert(challenge24(input: "a1b2c3") == 6, "Challenge 24 failed.")
+assert(challenge24(input: "a10b20c30") == 60, "Challenge 24 failed.")
+assert(challenge24(input: "h8ers") == 8, "Challenge 24 failed.")
+
+
