@@ -181,3 +181,12 @@ assert(challenge24(input: "a10b20c30") == 60, "Challenge 24 failed.")
 assert(challenge24(input: "h8ers") == 8, "Challenge 24 failed.")
 
 
+//Challenge 25: Write a function that returns the square root of a positive integer, rounded down to the nearest integer, without using sqrt().
+func challenge25(number: Int) -> Int {
+    return Int(pow(Double(number), (0.5)).rounded(.down))
+}
+
+assert(challenge25(number: 9) == 3, "Challenge 25 failed.")
+assert(challenge25(number: 16777216) == 4096, "Challenge 25 failed.")
+assert(challenge25(number: 16) == 4, "Challenge 25 failed.")
+assert(challenge25(number: 15) == 3, "Challenge 25 failed.")
