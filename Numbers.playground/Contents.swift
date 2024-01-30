@@ -190,3 +190,11 @@ assert(challenge25(number: 9) == 3, "Challenge 25 failed.")
 assert(challenge25(number: 16777216) == 4096, "Challenge 25 failed.")
 assert(challenge25(number: 16) == 4, "Challenge 25 failed.")
 assert(challenge25(number: 15) == 3, "Challenge 25 failed.")
+
+//Challenge 26: Create a function that subtracts one positive integer from another, without using -.
+func challenge26(subtract: Int, from: Int) -> Int{
+    return (from + (-subtract))
+}
+assert(challenge26(subtract: 5, from: 9) == 4, "Challenge 26 failed.")
+assert(challenge26(subtract: 10, from: 30) == 20, "Challenge 26 failed.")
+
