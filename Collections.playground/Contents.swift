@@ -31,6 +31,7 @@ assert([55555].challenge37(count: 1) == 0, "Challenge 37 failed.")
 
 
 
+//Challenge 38: Write an extension for all collections that returns the N smallest elements as an array, sorted smallest first, where N is an integer parameter.
 extension Collection where Iterator.Element: Comparable{
     func challenge38(count: Int) -> [Iterator.Element] {
         return Array(self.sorted().prefix(count))
@@ -41,3 +42,37 @@ assert([1,2,3,4].challenge38(count: 3) == [1,2,3],"Challenge 38 failed")
 assert(["q", "f", "k"].challenge38(count: 10) == ["f", "k", "q"], "Challenge 38 failed")
 assert([256,16].challenge38(count: 3) == [16,256], "Challenge 38 failed")
 assert([String]().challenge38(count: 3) == [], "Challenge 38 failed")
+
+
+
+//Extend collections with a function that returns an array of strings sorted by their lengths, longest first.
+extension Collection where Iterator.Element == String {
+    func challenge39() -> [String] {
+        return self.sorted { $0.count > $1.count }
+    }
+}
+
+assert(["a", "ab", "abc"].challenge39() == ["abc", "ab", "a"], "Challenge 39 failed")
+assert(["paul", "taylor", "adele"].challenge39() == ["taylor", "adele", "paul"], "Challenge 39 failed")
+assert([].challenge39() == [], "Challenge 39 failed")
+
+
+
+//Challenge 40: Create a function that accepts an array of unsorted numbers from 1 to 100 where zero or more numbers might be missing, and returns an array of the missing numbers.
+extension Collection where Iterator.Element == Int {
+    func challenge40() -> [Int] {
+        var fullArray = Array(1...100)
+        var usedArray:[Int] = []
+        for i in self {
+            usedArray.append(i)
+        }
+        let missingNumbers = Set(fullArray).symmetricDifference(Set(usedArray))
+        return Array(missingNumbers).sorted()
+    }
+}
+
+var testArray = Array(1...100)
+testArray.remove(at: 25)
+testArray.remove(at: 20)
+testArray.remove(at: 6)
+assert(testArray.challenge40() == [7, 21,26], "Challenge 40 failed")
