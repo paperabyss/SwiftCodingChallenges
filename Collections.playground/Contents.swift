@@ -61,7 +61,7 @@ assert([].challenge39() == [], "Challenge 39 failed")
 //Challenge 40: Create a function that accepts an array of unsorted numbers from 1 to 100 where zero or more numbers might be missing, and returns an array of the missing numbers.
 extension Collection where Iterator.Element == Int {
     func challenge40() -> [Int] {
-        var fullArray = Array(1...100)
+        let fullArray = Array(1...100)
         var usedArray:[Int] = []
         for i in self {
             usedArray.append(i)
@@ -76,3 +76,30 @@ testArray.remove(at: 25)
 testArray.remove(at: 20)
 testArray.remove(at: 6)
 assert(testArray.challenge40() == [7, 21,26], "Challenge 40 failed")
+
+
+
+//Challenge 41: Write an extension to collections that accepts an array of Int and returns the median average, or nil if there are no values.
+extension Collection where Iterator.Element == Int {
+    func challenge41() -> Double? {
+        guard !self.isEmpty else { return nil}
+        var middle: Double
+        let numbers = self.sorted()
+        if self.count % 2 == 0 {
+            let firstMiddle = Double(numbers[numbers.count/2])
+            let secondMiddle = Double(numbers[numbers.count/2 - 1])
+            middle = (firstMiddle + secondMiddle)/2
+        } else {
+            var middlePosistion = numbers.count / 2
+            middle = Double(numbers[middlePosistion])
+        }
+        return middle
+    }
+}
+
+assert([1, 2, 3].challenge41() == 2, "Challenge 41 failed.")
+assert([1, 2, 9].challenge41() == 2, "Challenge 41 failed.")
+assert([1, 3, 5, 7, 9].challenge41() == 5, "Challenge 41 failed.")
+assert([1, 2, 3, 4].challenge41() == 2.5, "Challenge 41 failed.")
+assert([Int]().challenge41() == nil, "Challenge 41 failed.")
+
