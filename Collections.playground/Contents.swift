@@ -103,3 +103,21 @@ assert([1, 3, 5, 7, 9].challenge41() == 5, "Challenge 41 failed.")
 assert([1, 2, 3, 4].challenge41() == 2.5, "Challenge 41 failed.")
 assert([Int]().challenge41() == nil, "Challenge 41 failed.")
 
+
+
+//Challenge 42: Write an extension for all collections that reimplements the firstIndex(of:) method.
+
+extension Collection where Iterator.Element: Equatable{
+    func challenge42(firstIndexOf: Element) -> Int? {
+        for (index, i) in self.enumerated() {
+            if i == firstIndexOf {
+                return index
+            }
+        }
+        return nil
+    }
+}
+
+assert([1,2,3].challenge42(firstIndexOf: 1) == 0, "Challenge 42 failed.")
+assert([1,2,3].challenge42(firstIndexOf: 3) == 2, "Challenge 42 failed.")
+assert([1,2,3].challenge42(firstIndexOf: 5) == nil, "Challenge 42 failed.")
