@@ -121,3 +121,5 @@ extension Collection where Iterator.Element: Equatable{
 assert([1,2,3].challenge42(firstIndexOf: 1) == 0, "Challenge 42 failed.")
 assert([1,2,3].challenge42(firstIndexOf: 3) == 2, "Challenge 42 failed.")
 assert([1,2,3].challenge42(firstIndexOf: 5) == nil, "Challenge 42 failed.")
+
+
