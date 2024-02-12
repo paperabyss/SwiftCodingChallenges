@@ -88,3 +88,48 @@ assert(challenge57(input1: "carry", input2: "daddy") == false, "Challenge 57 fai
 assert(challenge57(input1: [1,2,1,2,3], input2: [4,5,4,5,6]) == true, "Challenge 57 failed.")
 assert(challenge57(input1: "curry", input2: "flurry") == false, "Challenge 57 failed.")
 
+
+
+//Challenge 58: Write a function that accepts a string containing the characters (, [, {, <, >, }, ], and ) in any arrangement and frequency. It should return true if the brackets are opened and closed in the correct order, and if all brackets are closed. Any other input should false.
+func challenge58(input: String) -> Bool {
+    var allCharacters = [ "(", "[", "{", "<", ">", "}", "]", ")"]
+    var matches = [")":"(", "]":"[", "}":"{", ">":"<"]
+    var openings = ["(", "[", "{", "<"]
+    guard input.count % 2 == 0 else { return false }
+    var input = Array(input)
+
+    //Check that the string only contains letters we want.
+    for i in input {
+        var i = String(i)
+        if !allCharacters.contains(i) {
+            return false
+        }
+    }
+    
+    var checkString: [String] = []
+    for i in input {
+        var i = String(i)
+        if !openings.contains(i) && checkString.count == 0 {
+            return false
+        } else if !openings.contains(i) {
+            if checkString.last != matches[i] {
+                return false
+            } else {
+                checkString.removeLast()
+            }
+        } else {
+            checkString.append(i)
+        }
+    }
+    return true
+}
+
+assert(challenge58(input: "()") == true, "Challenge 58 failed.")
+assert(challenge58(input: "([])") == true, "Challenge 58 failed.")
+assert(challenge58(input: "([])(<{}>)") == true, "Challenge 58 failed.")
+assert(challenge58(input: "}{") == false, "Challenge 58 failed.")
+assert(challenge58(input: "([)]") == false, "Challenge 58 failed.")
+assert(challenge58(input: "[<<<{}>>]") == false, "Challenge 58 failed.")
+
+
+
