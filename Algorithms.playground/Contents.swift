@@ -1,5 +1,6 @@
 import Cocoa
 
+//Challenge 55: Create an extension for arrays that sorts them using the bubble sort algorithm.
 extension Array where Element: Comparable {
      func challenge55() -> [Element] {
         guard !self.isEmpty else { return [] }
@@ -31,6 +32,9 @@ assert([12, 5, 4, 9, 3, 2, 1].challenge55() == [1,2,3,4,5,9,12], "Challenge 55 f
 assert(["f","a", "b"].challenge55() == ["a","b","f"], "Challenge 55 failed.")
 assert([String]().challenge55() == [], "Challenge 55 failed.")
 
+
+
+//Challenge 56: Create an extension for arrays that sorts them using the insertion sort algorithm.
 extension Array where Element: Comparable {
     func challenge56() -> [Element] {
         guard !self.isEmpty else { return [] }
@@ -55,3 +59,32 @@ extension Array where Element: Comparable {
 assert([12, 5, 4, 9, 3, 2, 1].challenge56() == [1,2,3,4,5,9,12], "Challenge 56 failed.")
 assert(["f","a", "b"].challenge56() == ["a","b","f"], "Challenge 56 failed.")
 assert([String]().challenge56() == [], "Challenge 56 failed.")
+
+
+
+//Challenge 57: Write a function that accepts two values and returns true if they are isomorphic. That is, each part of the value must map to precisely one other, but that might be itself.
+func challenge57(input1: Any, input2: Any) -> Bool {
+    var translationValues: [Character: Character] = [:]
+    var input1 = Array(String(describing: input1))
+    var input2 = Array(String(describing: input2))
+    guard input1.count == input2.count else { return false}
+
+    for (index, i) in input1.enumerated() {
+        if translationValues[i] != nil {
+            if translationValues[i] != input2[index] {
+                return false
+            }
+        } else if translationValues.values.contains(input2[index]) {
+            return false
+        } else {
+            translationValues.updateValue(input2[index], forKey: i)
+        }
+    }
+    return true
+}
+
+assert(challenge57(input1: "clap", input2: "slap") == true, "Challenge 57 failed.")
+assert(challenge57(input1: "carry", input2: "daddy") == false, "Challenge 57 failed.")
+assert(challenge57(input1: [1,2,1,2,3], input2: [4,5,4,5,6]) == true, "Challenge 57 failed.")
+assert(challenge57(input1: "curry", input2: "flurry") == false, "Challenge 57 failed.")
+
