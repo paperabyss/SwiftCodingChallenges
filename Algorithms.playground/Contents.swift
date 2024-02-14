@@ -182,3 +182,31 @@ assert(challenge60(board: [["X", "", "O"], ["X", "", "O"], ["X", "", ""]]) == tr
 assert(challenge60(board: [["", "X", ""], ["O", "X", ""], ["O", "X", ""]]) == true)
 assert(challenge60(board: [["", "X", ""], ["O", "X", ""], ["O", "", "X"]]) == false)
 assert(challenge60(board: [["", "", ""], ["", "", ""], ["", "", ""]]) == false)
+
+
+
+//Challenge 61: “Write a function that returns an array of prime numbers from 2 up to but excluding N, taking care to be as efficient as possible”
+func challenge61(upTo max: Int) -> [Int] {
+    var primes: [Int] = []
+    for i in (2...max-1) {
+        primes.append(i)
+    }
+
+    for i in (primes) {
+        var total = 0
+        var counter = 2
+        while total < max {
+            total = (i * counter)
+            if primes.contains(total) {
+                primes.removeAll { $0 == total}
+            }
+            counter += 1
+        }
+    }
+    return primes
+}
+
+
+assert(challenge61(upTo: 10) == [2,3,5,7], "Challenge 61 failed.")
+assert(challenge61(upTo: 11) == [2,3,5,7], "Challenge 61 failed.")
+assert(challenge61(upTo: 12) == [2,3,5,7,11], "Challenge 61 failed.")
