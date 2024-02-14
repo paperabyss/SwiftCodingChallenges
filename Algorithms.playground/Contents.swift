@@ -133,3 +133,52 @@ assert(challenge58(input: "[<<<{}>>]") == false, "Challenge 58 failed.")
 
 
 
+//Challenge 59: Create an extension for arrays that sorts them using the quicksort algorithm.
+extension Array where Element: Comparable {
+    func challenge59(low: Int, high: Int) -> [Element] {
+        var pivot = self[Int.random(in: low...high)]
+        var lower = pivot
+        var higher = self[high]
+
+        while lower < higher {
+            lower
+        }
+
+        return []
+    }
+}
+
+
+
+//Challenge 60: Create a function that detects whether either player has won in a game of Tic-Tac-Toe.
+func challenge60(board: [[String]]) -> Bool {
+    var firstLine = board[0]
+    var secondLine = board[1]
+    var thirdLine = board[2]
+
+    var possibleWins = [
+        firstLine,
+        secondLine,
+        thirdLine,
+        [firstLine[0],secondLine[0], thirdLine[0]],
+        [firstLine[1],secondLine[1], thirdLine[1]],
+        [firstLine[2],secondLine[2], thirdLine[2]],
+        [firstLine[0],secondLine[1], thirdLine[2]],
+        [firstLine[2],secondLine[1], thirdLine[0]],
+    ]
+    
+    for i in possibleWins {
+        if (i.allSatisfy { $0 == "X"}) {
+            return true
+        } else if (i.allSatisfy { $0 == "O"}) {
+            return true
+        }
+    }
+    return false
+}
+
+assert(challenge60(board: [["X", "", "O"], ["", "X", "O"], ["", "", "X"]]) == true)
+assert(challenge60(board: [["X", "", "O"], ["X", "", "O"], ["X", "", ""]]) == true)
+assert(challenge60(board: [["", "X", ""], ["O", "X", ""], ["O", "X", ""]]) == true)
+assert(challenge60(board: [["", "X", ""], ["O", "X", ""], ["O", "", "X"]]) == false)
+assert(challenge60(board: [["", "", ""], ["", "", ""], ["", "", ""]]) == false)
