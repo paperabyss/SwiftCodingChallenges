@@ -210,3 +210,31 @@ func challenge61(upTo max: Int) -> [Int] {
 assert(challenge61(upTo: 10) == [2,3,5,7], "Challenge 61 failed.")
 assert(challenge61(upTo: 11) == [2,3,5,7], "Challenge 61 failed.")
 assert(challenge61(upTo: 12) == [2,3,5,7,11], "Challenge 61 failed.")
+
+// Challenge 62: Write a function that accepts an array of CGPoint pairs, and returns an array of the angles between each point pair. Return the angles in degrees, where 0 or 360 is straight up.
+
+func challenge62( points: [(first: CGPoint, second: CGPoint)]) -> [CGFloat] {
+    var angles: [CGFloat] = []
+
+    for point in points {
+        var angle = (((atan2(point.first.y - point.second.y, point.first.x - point.second.x)) * 180 / Double.pi)-90)
+        if angle < 0 {
+            angle += 360
+        }
+        angles.append(angle)
+    }
+    return angles
+}
+
+var points = [(first: CGPoint, second: CGPoint)]()
+points.append((first: CGPoint.zero, second: CGPoint(x: 0, y: -100)))
+points.append((first: CGPoint.zero, second: CGPoint(x: 100, y: -100)))
+points.append((first: CGPoint.zero, second: CGPoint(x: 100, y: 0)))
+points.append((first: CGPoint.zero, second: CGPoint(x: 100, y: 100)))
+points.append((first: CGPoint.zero, second: CGPoint(x: 0, y: 100)))
+points.append((first: CGPoint.zero, second: CGPoint(x: -100, y: 100)))
+points.append((first: CGPoint.zero, second: CGPoint(x: -100, y: 0)))
+points.append((first: CGPoint.zero, second: CGPoint(x: -100, y: -100)))
+
+assert(challenge62(points: points) == [0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0], "Challenge 62 failed.")
+
