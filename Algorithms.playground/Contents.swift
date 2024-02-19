@@ -238,3 +238,64 @@ points.append((first: CGPoint.zero, second: CGPoint(x: -100, y: -100)))
 
 assert(challenge62(points: points) == [0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0], "Challenge 62 failed.")
 
+
+
+//Challenge: Write a function that accepts a two-dimensional array of integers that are 0 or 1, a new number to place, and a position to start. You should read the existing number at the start position, change it to the new number, then change any surrounding numbers that matched the start number, then change any surrounding those, and so on - like a flood fill algorithm in Photoshop.
+
+func challenge63(fill: Int, in grid: [[Int]], at: (x: Int, y: Int), _ changedNumber: Int? = nil) -> [[Int]] {
+    var newGrid = grid
+    var x = at.x
+    var y = at.y
+    var tryToChange: [(x: Int, y: Int)] = []
+    var numberToChange: Int = grid[y][x]
+    func checkSurroundings(x: Int, y: Int ) {
+     //   print("Entered new location maker")
+        if x > 0 {
+            tryToChange.append((x: x-1, y: y))
+        }
+        if x + 1 < grid[0].endIndex {
+            tryToChange.append((x: x+1, y: y))
+        }
+        if y > 0 {
+            tryToChange.append((x: x, y: y-1))
+        }
+        if y + 1 < grid.endIndex {
+            tryToChange.append((x: x , y: y+1))
+        }
+   //     print("End of new locations loop. Current locations to check \(tryToChange.count)")
+    }
+
+    newGrid[y][x] = fill
+    checkSurroundings(x: at.x,y: at.y)
+
+    while tryToChange.count > 0 {
+     //   print("Entered While loop")
+        for location in tryToChange {
+        //    print("entered for loop at : \(location)")
+            if newGrid[location.y][location.x] == numberToChange {
+          //      print("Entered If loop")
+                newGrid[location.y][location.x] = fill
+                checkSurroundings(x: location.x, y: location.y)
+
+            }
+            tryToChange.removeAll(where: { $0 == (location.x, location.y)})
+         //   print("left to check: \(tryToChange.count)")
+        }
+    }
+    return newGrid
+}
+
+var grid = [
+    [0, 0, 0, 0, 0, 1, 0, 0, 1, 1],
+    [0, 1, 1, 0, 0, 0, 0, 1, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 0, 1, 0, 0, 1, 1, 0, 0, 0],
+    [1, 0, 1, 0, 1, 1, 1, 1, 1, 0],
+    [1, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 0, 1, 1],
+    [1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 0, 0, 0],
+    [0, 1, 1, 0, 0, 1, 0, 1, 1, 1],
+]
+print(challenge63(fill: 5, in: grid, at: (2,0)))
+
